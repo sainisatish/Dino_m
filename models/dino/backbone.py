@@ -190,7 +190,8 @@ def build_backbone(args):
                 'swin_L_384_22k': 'swin_large_patch4_window12_384_22k.pth',
             }
             pretrainedpath = os.path.join(pretrained_dir, PTDICT[args.backbone])
-            checkpoint = torch.load(pretrainedpath, map_location='cpu')['model']
+            print("loading swinl backbone chkpt")
+            checkpoint = torch.load(pretrainedpath, map_location='cuda')['model']
             from collections import OrderedDict
             def key_select_function(keyname):
                 if 'head' in keyname:
