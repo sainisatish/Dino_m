@@ -178,11 +178,10 @@ def build_backbone(args):
 
         # freeze some layers
         if backbone_freeze_keywords is not None:
+            print("freezing swinl backbone")
             for name, parameter in backbone.named_parameters():
-                for keyword in backbone_freeze_keywords:
-                    if keyword in name:
-                        parameter.requires_grad_(False)
-                        break
+                parameter.requires_grad_(False)
+                
         if "backbone_dir" in args:
             pretrained_dir = args.backbone_dir
             PTDICT = {
